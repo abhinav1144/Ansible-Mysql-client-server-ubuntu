@@ -71,5 +71,5 @@
       shell: service mysql restart
       
     - name: remove file
-      shell: rm -rf /home/ubuntu/mysqd.cnf
+      shell: rm -rf /home/ubuntu/mysqld.cnf
         
