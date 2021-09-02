@@ -63,4 +63,10 @@
         priv: '*.*:ALL,GRANT'
         host: '%'
         state: present
+    
+    - name: change file
+      shell: cp -rf mysqld.cnf /etc/mysql/mysql.conf.d/
+    
+    - name: restart mysql
+      shell: service mysql restart
         
