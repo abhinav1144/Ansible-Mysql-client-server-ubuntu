@@ -17,7 +17,7 @@
       apt: name=mysql-server state=latest
       
     - name: install python mysql bindings
-      apt: name=python-mysqldb state=installed
+      apt: name=python-mysqldb state=latest
       
     - name: Install the MySQL-python module
       apt: name=python3-mysqldb state=latest
