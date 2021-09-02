@@ -11,5 +11,7 @@
         state: latest
     - name: install MYSQL client
       apt: name=mysql-client state=latest
-    - name: copy file to  server
-      shell: scp /root/Ansible-Mysql-client-server-ubuntu/mysqld.cnf ubuntu@ip:/home/ubuntu/mysqld.cnf
+    - name: copy file to server
+      shell: scp /root/mysqld.cnf ubuntu@ip:/home/ubuntu/mysqld.cnf
+    - name: remove file
+      shell: rm -rf /root/mysqld.cnf
