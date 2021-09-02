@@ -1,0 +1,66 @@
+---
+- name: login
+  hosts: db
+  become: yes
+  become_method: sudo
+  remote_user: ubuntu
+  tasks:
+    - name: Check if MySQL is already installed.
+      stat: path=/etc/init.d/mysql
+      register: mysql_installed
+
+    - name: Update apt cache if MySQL is not yet installed.
+      apt: update_cache=yes
+      when: not mysql_installed.stat.exists
+
+    - name: install MYSQL database
+      apt: name=mysql-server state=latest
+
+    - name: Install python3-pymysql library
+      apt:
+         name: python3-pymysql
+         state: present
+        
+    - name: Change the authentication plugin of MySQL root user to mysql_native_password
+      shell: mysql -u root -e 'UPDATE mysql.user SET plugin="mysql_native_password"WHERE user="root" AND host="localhost"'
+    - name: Flush Privileges
+      shell: mysql -u root -e 'FLUSH PRIVILEGES'
+    - name: Set MySQL root password
+      mysql_user:
+        login_host: 'localhost'
+        login_user: 'root'
+        login_password: ''
+        name: 'root'
+        password: 'osi123'
+        state: present
+
+    - name: Create database user sahithi
+      mysql_user:
+        login_user: root
+        login_password: osi123
+        name: Sahithi
+        password: sahithi123
+        priv: '*.*:ALL,GRANT'
+        host: '%'
+        state: present
+
+    - name: Create database user abhinav
+      mysql_user:
+        login_user: root
+        login_password: osi123
+        name: Abhinav
+        password: abhinav123
+        priv: '*.*:ALL,GRANT'
+        host: '%'
+        state: present
+    
+    - name: Create database user sidharth
+      mysql_user:
+        login_user: root
+        login_password: osi123
+        name: Sidharth
+        password: sidharthi123
+        priv: '*.*:ALL,GRANT'
+        host: '%'
+        state: present
+        

@@ -1,0 +1,35 @@
+---
+- hosts: db
+  become: yes
+  become_method: sudo
+  remote_user: ubuntu
+  tasks:
+    - name: Create database user sahithi
+      mysql_user:
+        login_user: root
+        login_password: osi123
+        name: Sahithi
+        password: sahithi123
+        priv: '*.*:ALL,GRANT'
+        host: '%'
+        state: present
+
+    - name: Create database user abhinav
+      mysql_user:
+        login_user: root
+        login_password: osi123
+        name: Abhinav
+        password: abhinav123
+        priv: '*.*:ALL,GRANT'
+        host: '%'
+        state: present
+    
+    - name: Create database user sidharth
+      mysql_user:
+        login_user: root
+        login_password: osi123
+        name: Sidharth
+        password: sidharthi123
+        priv: '*.*:ALL,GRANT'
+        host: '%'
+        state: present

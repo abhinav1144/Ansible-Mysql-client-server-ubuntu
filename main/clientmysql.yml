@@ -1,0 +1,23 @@
+---
+- name: Create a mysql server in the hosts
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  gather_facts: true
+  tasks:
+    - name: Update Repository
+      apt:
+        update_cache: yes
+        state: latest
+    - name: Add the repo
+      get_url:
+        url: https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb
+        dest: /opt/mysql
+    - name: Install package
+      apt:
+        deb: /opt/mysql/mysql-apt-config_0.8.18-1_all.deb
+        state: present
+    - name: Install MySql Shell
+      apt:
+        name: mysql-shell
+        state: latest
