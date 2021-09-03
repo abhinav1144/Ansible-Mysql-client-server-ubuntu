@@ -39,6 +39,13 @@
         name: 'root'
         password: 'osi123'
         state: present
+       
+    - name: name: create mysql database
+      mysql_db:
+        login_user: root
+        login_password: osi123
+        name: 'Sahithi,Abhinav,Sidharth'
+        state: present
 
     - name: Create database user sahithi
       mysql_user:
@@ -46,7 +53,7 @@
         login_password: osi123
         name: Sahithi
         password: sahithi123
-        priv: '*.*:ALL,GRANT'
+        priv: 'Sahithi.*:ALL,GRANT'
         host: '%'
         state: present
 
